@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Túi mù · Một Xíu Dễ Thương</title>
+<style>
+  body{margin:0;background:#FFF6EC;color:#A0694A;font-family:-apple-system,system-ui,"Segoe UI",Roboto,Arial,sans-serif;padding:20px 14px 40px}
+  .wrap{max-width:560px;margin:0 auto}
+  h1{text-align:center;font-weight:600;font-size:32px;margin:10px 0 2px}
+  .sub{text-align:center;color:#C9996E;letter-spacing:3px;font-size:13px;margin-bottom:16px}
+  .legend{display:flex;gap:18px;justify-content:center;font-size:14px;margin:6px 0 12px}
+  .dot{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:6px}
+  .count{text-align:center;font-size:14px;margin-bottom:12px}
+  .status{text-align:center;font-size:13px;color:#C9996E;min-height:18px;margin-bottom:10px}
+  .card{background:#FFFBF5;border:1.5px dashed #C9996E;border-radius:18px;padding:14px;margin-bottom:18px}
+  .card h2{font-weight:600;font-size:20px;margin:2px 0;text-align:center}
+  .card .price{text-align:center;color:#E0789F;font-weight:bold;margin-bottom:12px}
+  .grid{display:grid;grid-template-columns:repeat(10,1fr);gap:6px}
+  .slot{aspect-ratio:1;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:bold}
+  .free{background:#F6C3D6;color:#7A3B5A}
+  .sold{background:#D5CDC8;color:#8E8580;text-decoration:line-through}
+  .note{background:#FCEBF2;border-radius:16px;padding:14px 16px;font-size:14px;line-height:1.6}
+  .note b{color:#E0789F}
+  .syntax{background:#fff;border-radius:10px;padding:10px 12px;margin:8px 0;border:1px solid #F0D9C8}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>túi mù</h1>
+  <div class="sub">MỘT XÍU DỄ THƯƠNG · JUST A LITTLE CUTE</div>
+  <div class="legend">
+    <span><span class="dot" style="background:#F6C3D6"></span>còn trống</span>
+    <span><span class="dot" style="background:#D5CDC8"></span>đã hết</span>
+  </div>
+  <div class="count" id="count"></div>
+  <div class="status" id="status">Đang tải số túi...</div>
+
+  <div class="card">
+    <h2>Túi mù 10k</h2>
+    <div class="price">Dây đeo điện thoại · 2 món / túi</div>
+    <div class="grid" id="grid1"></div>
+  </div>
+  <div class="card">
+    <h2>Túi mù 20k</h2>
+    <div class="price">Móc khóa &amp; vòng tay · 2 món / túi</div>
+    <div class="grid" id="grid2"></div>
+  </div>
+
+  <div class="note">
+    <b>Cách chốt:</b> nhắn tin shop qua mes để chốt, theo mẫu:
+    <div class="syntax">Số túi mù bạn chọn_địa chỉ nhận_giờ nhận_ngày nhận</div>
+    VD: <i>62,5,19_Đại học Sài gòn_13h_ngày 27/11</i><br>
+    Nếu bạn tự lấy tại shop thì ghi địa chỉ là <b>"tự lấy"</b>.<br><br>
+    Giờ giao hàng shop sẽ sắp xếp và báo lại bạn.<br><br>
+    Khi chương trình kết thúc, shop sẽ đăng ảnh toàn bộ các túi mù trước khi được bán để khách check nha.<br><br>
+    Ô <b>màu hồng</b> là túi còn trống, ô <b>màu xám</b> là đã hết. Nếu trang chưa cập nhật kịp, bạn thông cảm giúp shop nha 🌸
+  </div>
+</div>
+
+<script>
+  // Dán link CSV của Google Sheet vào đây
+  const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSATzAGqsi9QiIbjT6Q5CLc3dMCdCYSEv9YStpqyBEEPnMibRTyf7gU4Op6VHI9UyF8MWLypcZ8guNm/pub?gid=0&single=true&output=csv";
+  const TOTAL = 100;
+
+  function render(soldSet){
+    let a = "", b = "";
+    for (let i = 1; i <= TOTAL; i++){
+      const cls = soldSet.has(i) ? "slot sold" : "slot free";
+      const html = `<div class="${cls}">${i}</div>`;
+      if (i <= 50) a += html; else b += html;
+    }
+    document.getElementById("grid1").innerHTML = a;
+    document.getElementById("grid2").innerHTML = b;
+    document.getElementById("count").textContent = `Còn trống: ${TOTAL - soldSet.size} / ${TOTAL} túi`;
+  }
+
+  async function load(){
+    try {
+      const res = await fetch(SHEET_CSV_URL + "&t=" + Date.now());
+      if (!res.ok) throw new Error("bad");
+      const text = await res.text();
+      const soldSet = new Set();
+      text.split("\n").slice(1).forEach(line => {
+        const [num, status] = line.split(",");
+        const n = parseInt(num, 10);
+        if (!isNaN(n) && status && status.trim().toLowerCase() === "x") soldSet.add(n);
+      });
+      render(soldSet);
+      document.getElementById("status").textContent = "";
+    } catch (e) {
+      render(new Set());
+      document.getElementById("status").textContent = "Chưa tải được danh sách, bạn tải lại trang nha";
+    }
+  }
+
+  load();
+  setInterval(load, 60000);
+</script>
+</body>
+</html>
