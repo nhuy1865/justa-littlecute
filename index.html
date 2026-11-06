@@ -3,19 +3,28 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Túi mù · Một Xíu Dễ Thương</title>
+<title>Một Xíu Dễ Thương · Menu & Túi mù</title>
 <style>
   body{margin:0;background:#FFF6EC;color:#A0694A;font-family:-apple-system,system-ui,"Segoe UI",Roboto,Arial,sans-serif;padding:20px 14px 40px}
   .wrap{max-width:560px;margin:0 auto}
-  h1{text-align:center;font-weight:600;font-size:32px;margin:10px 0 2px}
-  .sub{text-align:center;color:#C9996E;letter-spacing:3px;font-size:13px;margin-bottom:16px}
+  h1{text-align:center;font-weight:600;font-size:30px;margin:10px 0 2px}
+  .sub{text-align:center;color:#C9996E;letter-spacing:3px;font-size:12px;margin-bottom:18px}
+  h2.sec{text-align:center;font-weight:600;font-size:20px;margin:26px 0 12px;color:#A0694A}
+  .menu{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .item{background:#FFFBF5;border:1.5px dashed #C9996E;border-radius:16px;padding:10px;text-align:center}
+  .item img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;background:#F5E6D3;display:block}
+  .item .ph{width:100%;aspect-ratio:1;border-radius:12px;background:#F5E6D3;color:#C9996E;font-size:13px;display:flex;align-items:center;justify-content:center}
+  .item .name{font-weight:600;font-size:16px;margin:8px 0 2px}
+  .item .price{color:#E0789F;font-weight:bold;font-size:15px}
+  .item .tiers{font-size:12px;color:#A0694A;margin-top:4px;line-height:1.5}
+  .ship{background:#F5E6D3;border-radius:14px;padding:12px 14px;font-size:14px;line-height:1.6;margin-top:14px}
   .legend{display:flex;gap:18px;justify-content:center;font-size:14px;margin:6px 0 12px}
   .dot{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:6px}
-  .count{text-align:center;font-size:15px;margin-bottom:4px;font-weight:600}
-  .updated{text-align:center;font-size:12px;color:#C9996E;margin-bottom:12px}
+  .count{text-align:center;font-size:15px;font-weight:600;margin-bottom:4px}
+  .updated{text-align:center;font-size:12px;color:#C9996E;margin-bottom:10px}
   .status{text-align:center;font-size:13px;color:#E0789F;min-height:18px;margin-bottom:10px}
   .card{background:#FFFBF5;border:1.5px dashed #C9996E;border-radius:18px;padding:14px;margin-bottom:18px}
-  .card h2{font-weight:600;font-size:20px;margin:2px 0;text-align:center}
+  .card h3{font-weight:600;font-size:19px;margin:2px 0;text-align:center}
   .card .price{text-align:center;color:#E0789F;font-weight:bold;margin-bottom:12px}
   .grid{display:grid;grid-template-columns:repeat(10,1fr);gap:6px}
   .slot{aspect-ratio:1;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:bold}
@@ -24,12 +33,64 @@
   .note{background:#FCEBF2;border-radius:16px;padding:14px 16px;font-size:14px;line-height:1.6}
   .note b{color:#E0789F}
   .syntax{background:#fff;border-radius:10px;padding:10px 12px;margin:8px 0;border:1px solid #F0D9C8}
+  .tabs{display:flex;gap:10px;margin:6px 0 18px}
+  .tab{flex:1;border:1.5px solid #C9996E;background:#FFFBF5;color:#A0694A;border-radius:14px;padding:12px 8px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit}
+  .tab.active{background:#F6C3D6;color:#7A3B5A;border-color:#E0789F}
+  .hidden{display:none}
+  .gal{position:relative}
+  .gal .main{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;background:#F5E6D3;display:block}
+  .gal .nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,251,245,.85);border:none;border-radius:50%;width:32px;height:32px;font-size:18px;cursor:pointer;color:#A0694A}
+  .gal .prev{left:6px}.gal .next{right:6px}
+  .gal .dots{text-align:center;margin-top:6px;font-size:12px;color:#C9996E}
+  .item{margin-bottom:14px}
+  .item .name{font-weight:600;font-size:17px;margin:8px 0 2px;text-align:center}
+  .item .price{color:#E0789F;font-weight:bold;font-size:15px;text-align:center}
+  .item .tiers{font-size:13px;color:#A0694A;margin-top:4px;line-height:1.5;text-align:center}
+  #menu-list{max-width:560px;margin:0 auto}
+  .chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:12px;-webkit-overflow-scrolling:touch}
+  .chip{flex:0 0 auto;border:1.5px solid #C9996E;background:#FFFBF5;color:#A0694A;border-radius:999px;padding:8px 14px;font-size:14px;cursor:pointer;font-family:inherit}
+  .chip.active{background:#F6C3D6;color:#7A3B5A;border-color:#E0789F}
+  .pinfo{text-align:center;margin-bottom:12px}
+  .pinfo .pname{font-weight:600;font-size:18px}
+  .pinfo .pprice{color:#E0789F;font-weight:bold;font-size:16px;margin-top:2px}
+  .pinfo .ptiers{font-size:13px;margin-top:4px;line-height:1.5}
+  .mgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .mcard{background:#FFFBF5;border:1.5px dashed #C9996E;border-radius:14px;padding:6px;text-align:center}
+  .mcard .imgwrap{position:relative}
+  .mcard img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;background:#F5E6D3;display:block}
+  .mcard .code{position:absolute;top:6px;left:6px;background:rgba(224,120,159,.92);color:#fff;font-weight:bold;font-size:13px;padding:3px 9px;border-radius:999px;letter-spacing:1px}
+  .mcard .cap{font-size:13px;margin-top:4px;font-weight:600}
+  .contact{background:#FFFBF5;border:1.5px dashed #C9996E;border-radius:16px;padding:14px 16px;font-size:14px;line-height:1.7;margin:18px 0}
+  .contact b{color:#E0789F}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>túi mù</h1>
-  <div class="sub">MỘT XÍU DỄ THƯƠNG · JUST A LITTLE CUTE</div>
+  <h1>một xíu dễ thương</h1>
+  <div class="sub">MÓC KHÓA · DÂY ĐEO · VÒNG TAY</div>
+  <div class="tabs">
+    <button class="tab active" data-tab="tui">Chương trình túi mù tri ân</button>
+    <button class="tab" data-tab="menu">Menu</button>
+  </div>
+
+  <div class="view hidden" id="view-menu">
+  <h2 class="sec">Menu</h2>
+  <div id="menu-list"></div>
+
+  <div class="ship">
+    <b>Combo vòng tay thường:</b> Vòng tay + Móc khóa 41.000đ · Vòng tay + Dây đeo 31.000đ<br>
+    <b>Combo vòng charm:</b> Vòng charm + Móc khóa 44.000đ · Vòng charm + Dây đeo 34.000đ<br>
+    <b>Combo 2 món:</b> Móc khóa + Dây đeo 34.000đ<br>
+    <b>Combo 3 món:</b> Móc khóa + Dây đeo + Vòng tay 52.000đ · Móc khóa + Dây đeo + Vòng charm 55.000đ<br>
+    <b>Ship:</b> TP.HCM 15.000đ · Tỉnh 20.000đ (từ 3 sản phẩm)<br>
+    <b>Freeship:</b> đơn trên 250.000đ toàn quốc, và nhận tại cổng ĐH Sài Gòn / cổng chính ĐH Sư phạm<br>
+    <b>Nhận trực tiếp:</b> 271/4 An Dương Vương, P. Chợ Quán, TP.HCM<br>
+    Khách chọn mẫu có sẵn hoặc mix theo yêu cầu. Đơn có yêu cầu nhiều hoa, cầu kỳ, shop sẽ báo giá trước khi chốt.
+  </div>
+
+  </div>
+  <div class="view" id="view-tui">
+  <h2 class="sec">Túi mù tri ân</h2>
   <div class="legend">
     <span><span class="dot" style="background:#F6C3D6"></span>còn trống</span>
     <span><span class="dot" style="background:#D5CDC8"></span>đã hết</span>
@@ -39,24 +100,31 @@
   <div class="status" id="status"></div>
 
   <div class="card">
-    <h2>Túi mù 10k</h2>
-    <div class="price">Dây đeo điện thoại · (secret : 2 món / túi)</div>
+    <h3>Túi mù 10k</h3>
+    <div class="price">Secret: 2 cái / túi · Dây đeo điện thoại</div>
     <div class="grid" id="grid1"></div>
   </div>
   <div class="card">
-    <h2>Túi mù 20k</h2>
-    <div class="price">Móc khóa &amp; vòng tay · (secret 2 món / túi)</div>
+    <h3>Túi mù 20k</h3>
+    <div class="price">Secret: 2 cái / túi · Móc khóa &amp; vòng tay</div>
     <div class="grid" id="grid2"></div>
   </div>
 
   <div class="note">
-    <b>Cách chốt:</b> nhắn tin shop qua mes để chốt, theo mẫu:
+    <b>Cách chốt:</b> nhắn tin shop qua Messenger để chốt, theo mẫu:
     <div class="syntax">Số túi mù bạn chọn_địa chỉ nhận_giờ nhận_ngày nhận</div>
     VD: <i>62,5,19_Đại học Sài gòn_13h_ngày 27/11</i><br>
     Nếu bạn tự lấy tại shop thì ghi địa chỉ là <b>"tự lấy"</b>.<br><br>
     Giờ giao hàng shop sẽ sắp xếp và báo lại bạn.<br><br>
     Khi chương trình kết thúc, shop sẽ đăng ảnh toàn bộ các túi mù trước khi được bán để khách check nha.<br><br>
     Ô <b>màu hồng</b> là túi còn trống, ô <b>màu xám</b> là đã hết. Nếu trang chưa cập nhật kịp, bạn thông cảm giúp shop nha 🌸
+  </div>
+  </div>
+  <div class="contact">
+    <b>Liên hệ đặt hàng:</b> nhắn tin qua Messenger<br>
+    Facebook: <b>Một xíu dễ thương</b><br>
+    Instagram: <b>justa_littlecute05</b><br><br>
+    <b>Thanh toán:</b> đơn dưới 300.000đ thanh toán khi nhận hàng, không cọc, không cần chuyển khoản trước.
   </div>
 </div>
 
@@ -87,9 +155,66 @@
         "Cập nhật lúc " + now.toLocaleTimeString("vi-VN", {hour:"2-digit", minute:"2-digit"});
       document.getElementById("status").textContent = "";
     } catch (e) {
-      document.getElementById("status").textContent = "Chưa tải được danh sách, bạn thử tải lại trang nha";
+      document.getElementById("status").textContent = "Chưa tải được danh sách, bạn tải lại trang nha";
     }
   }
+
+  document.querySelectorAll('.tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('view-tui').classList.toggle('hidden', btn.dataset.tab !== 'tui');
+      document.getElementById('view-menu').classList.toggle('hidden', btn.dataset.tab !== 'menu');
+      window.scrollTo({top:0});
+    });
+  });
+
+
+  const PRODUCTS = [
+    { key: "MK", label: "Móc khóa", name: "Móc khóa hoa", price: "23.000đ",
+      tiers: "Mua 10: 22.000đ · Mua 20: 21.000đ<br>Thêm 1 bông: +3.000đ", folder: "moc-khoa" },
+    { key: "DD", label: "Dây đeo", name: "Dây đeo điện thoại", price: "13.000đ",
+      tiers: "Mua 10: 12.000đ · Mua 20: 11.000đ", folder: "day-deo" },
+    { key: "VT", label: "Vòng tay", name: "Vòng tay hoa", price: "20.000đ", tiers: "", folder: "vong-tay" },
+    { key: "VC", label: "Vòng charm", name: "Vòng tay charm", price: "23.000đ", tiers: "", folder: "vong-charm-ca" }
+  ];
+  const PER_PRODUCT = 10;
+  let curProduct = 0;
+
+  function renderMenu(){
+    const p = PRODUCTS[curProduct];
+    const chips = PRODUCTS.map((x, i) =>
+      `<button class="chip ${i===curProduct?'active':''}" data-i="${i}">${x.label}</button>`).join("");
+    let cards = "";
+    for (let n = 1; n <= PER_PRODUCT; n++){
+      const code = p.key + String(n).padStart(2, "0");
+      const file = `images/${p.folder}-${String(n).padStart(2, "0")}.jpg`;
+      cards += `<div class="mcard">
+        <div class="imgwrap">
+          <img src="${file}" alt="${code}" loading="lazy" onerror="this.style.opacity=.25">
+          <span class="code">${code}</span>
+        </div>
+        <div class="cap">${code}</div>
+      </div>`;
+    }
+    document.getElementById("menu-list").innerHTML =
+      `<div class="chips">${chips}</div>
+       <div class="pinfo">
+         <div class="pname">${p.name}</div>
+         <div class="pprice">${p.price}</div>
+         ${p.tiers ? `<div class="ptiers">${p.tiers}</div>` : ""}
+       </div>
+       <div class="mgrid">${cards}</div>`;
+  }
+
+  document.getElementById("menu-list").addEventListener("click", (e) => {
+    const chip = e.target.closest(".chip");
+    if (!chip) return;
+    curProduct = Number(chip.dataset.i);
+    renderMenu();
+  });
+
+  renderMenu();
 
   load();
   setInterval(load, 30000);
