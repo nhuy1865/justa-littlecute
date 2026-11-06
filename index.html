@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
 <title>Một Xíu Dễ Thương · Menu & Túi mù</title>
 <style>
   body{margin:0;background:#FFF6EC;color:#A0694A;font-family:-apple-system,system-ui,"Segoe UI",Roboto,Arial,sans-serif;padding:20px 14px 40px}
@@ -65,12 +66,101 @@
   .mcard.out .cap{color:#8E8580}
   .contact{background:#FFFBF5;border:1.5px dashed #C9996E;border-radius:16px;padding:14px 16px;font-size:14px;line-height:1.7;margin:18px 0}
   .contact b{color:#E0789F}
+
+  /* ---- làm đẹp tab menu ---- */
+  body{background:
+    radial-gradient(circle at 8% 12%, rgba(246,195,214,.45) 0 26px, transparent 27px),
+    radial-gradient(circle at 92% 8%, rgba(201,176,234,.40) 0 20px, transparent 21px),
+    radial-gradient(circle at 15% 55%, rgba(142,213,195,.35) 0 18px, transparent 19px),
+    radial-gradient(circle at 88% 60%, rgba(252,217,122,.40) 0 22px, transparent 23px),
+    radial-gradient(circle at 50% 98%, rgba(246,195,214,.40) 0 30px, transparent 31px),
+    #FFF6EC}
+  .hero{background:linear-gradient(135deg,#F6C3D6 0%,#F5E0EC 55%,#FFF6EC 100%);border-radius:22px;padding:18px 16px 16px;text-align:center;margin-bottom:6px;box-shadow:0 4px 14px rgba(160,105,74,.10)}
+  .hero .flowers{font-size:22px;letter-spacing:6px;margin-bottom:4px}
+  .hero h1{margin:0;font-size:30px;color:#7A3B5A}
+  .hero .sub{margin-top:6px;color:#A0694A}
+  .tabs .tab{box-shadow:0 3px 8px rgba(160,105,74,.12)}
+  .chips{justify-content:center;flex-wrap:wrap}
+  .chip{box-shadow:0 2px 6px rgba(160,105,74,.10);font-weight:600}
+  .chip.active{box-shadow:0 4px 10px rgba(224,120,159,.35)}
+  .pinfo{background:#FFFBF5;border-radius:18px;padding:14px 12px;box-shadow:0 3px 12px rgba(160,105,74,.10);margin-bottom:14px;border:1.5px solid #F5D7E3}
+  .pinfo .pname{font-size:20px;color:#7A3B5A}
+  .pinfo .pprice{display:inline-block;background:#F6C3D6;color:#7A3B5A;border-radius:999px;padding:4px 14px;margin-top:6px;font-weight:bold}
+  .mgrid{gap:12px}
+  .mcard{border:none;background:#FFFBF5;border-radius:18px;padding:8px;box-shadow:0 4px 12px rgba(160,105,74,.12);transition:transform .15s}
+  .mcard:active{transform:scale(.97)}
+  .mcard img{border-radius:14px}
+  .mcard .code{background:linear-gradient(135deg,#F07BA4,#E0789F);box-shadow:0 2px 6px rgba(224,120,159,.45)}
+  .mcard .cap{margin-top:6px;color:#7A3B5A;letter-spacing:1px}
+  .ship{background:#FFFBF5;border-radius:18px;padding:14px 16px;box-shadow:0 3px 12px rgba(160,105,74,.10);border:1.5px solid #F5D7E3}
+  .ship b{color:#E0789F}
+  .sec{position:relative}
+  .sec:before,.sec:after{content:"✿";color:#E0789F;margin:0 8px;font-size:16px}
+  .contact{background:#FFFBF5;border-radius:18px;box-shadow:0 3px 12px rgba(160,105,74,.10);border:1.5px solid #F5D7E3}
+  .note{border-radius:18px}
+  .card{border:none;box-shadow:0 4px 14px rgba(160,105,74,.10);background:#FFFBF5}
+  .card .price{background:#F6C3D6;color:#7A3B5A;border-radius:999px;display:inline-block;padding:3px 12px;font-size:13px}
+  .card{text-align:center}
+
+  /* ---- menu ảnh: kiểu polaroid ---- */
+  .mgrid{grid-template-columns:repeat(2,1fr);gap:16px;padding:4px 2px 10px}
+  .mcard{background:#FFFFFF;border:none;border-radius:6px;padding:10px 10px 14px;box-shadow:0 6px 16px rgba(160,105,74,.16),0 1px 3px rgba(160,105,74,.10);position:relative;transition:transform .18s}
+  .mcard:nth-child(odd){transform:rotate(-1.2deg)}
+  .mcard:nth-child(even){transform:rotate(1.2deg)}
+  .mcard:hover,.mcard:active{transform:rotate(0deg) scale(1.02)}
+  .mcard:before{content:"";position:absolute;top:-7px;left:50%;transform:translateX(-50%) rotate(-3deg);width:54px;height:16px;background:rgba(246,195,214,.85);border-radius:2px;z-index:2}
+  .mcard .imgwrap{border-radius:3px;overflow:hidden}
+  .mcard img{border-radius:3px}
+  .mcard .code{top:8px;left:8px;background:#E0789F;box-shadow:none;font-size:12px;padding:3px 10px;z-index:3}
+  .mcard .cap{margin-top:10px;font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:16px;letter-spacing:1px;color:#7A3B5A}
+  .pinfo{background:linear-gradient(180deg,#FFFBF5,#FCEBF2);border-radius:20px;position:relative;overflow:hidden}
+  .pinfo:after{content:"✿ ✿ ✿";position:absolute;right:12px;top:8px;color:#F0A6C2;font-size:12px;letter-spacing:4px}
+  .pinfo .pname{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:22px}
+  #menu-list{max-width:520px}
+
+  /* ---- pha màu pastel: vàng, xanh lá, xanh dương ---- */
+  .mcard:nth-child(4n+1):before{background:rgba(252,217,122,.9)}
+  .mcard:nth-child(4n+2):before{background:rgba(160,220,190,.9)}
+  .mcard:nth-child(4n+3):before{background:rgba(160,200,240,.9)}
+  .mcard:nth-child(4n+4):before{background:rgba(246,195,214,.9)}
+  .mcard:nth-child(4n+1) .code{background:#E9B93F}
+  .mcard:nth-child(4n+2) .code{background:#6DBE9A}
+  .mcard:nth-child(4n+3) .code{background:#6FA8DC}
+  .mcard:nth-child(4n+4) .code{background:#E0789F}
+  .mcard .cap{color:#6B5A4F}
+  .pinfo{background:linear-gradient(135deg,#FFF9DB 0%,#E6F6EE 50%,#E3EEFB 100%);border:1.5px solid #CFE6F2}
+  .pinfo .pprice{background:#FCE7A4;color:#7A5A1E}
+  .chip.active{background:linear-gradient(135deg,#F6C3D6,#FCE7A4);color:#7A3B5A}
+  .chip{border-color:#A9D8C4}
+
+  /* ---- nền có màu, không trắng trơn ---- */
+  html,body{background:linear-gradient(170deg,#FFF3E4 0%,#FDE8F0 35%,#EEF8F3 70%,#E6F0FB 100%) fixed !important}
+  .card{background:linear-gradient(160deg,#FFFFFF 0%,#FFF8DC 100%) !important;border:2px solid #F5D7E3 !important}
+  .note{background:linear-gradient(160deg,#FCE4EE 0%,#E8F7F0 100%) !important;border:2px solid #CFE9DD}
+  .contact{background:linear-gradient(160deg,#FFF8DC 0%,#E3EEFB 100%) !important;border:2px solid #CFE6F2 !important}
+  .ship{background:linear-gradient(160deg,#FFF8DC 0%,#FCE4EE 50%,#E6F5EE 100%) !important;border:2px solid #F5D7E3 !important}
+  .mcard{background:linear-gradient(160deg,#FFFFFF 0%,#FFF9E6 100%) !important}
+  .tab{background:linear-gradient(135deg,#FFF8DC,#E6F5EE) !important;border:2px solid #D9B8C6 !important}
+  .tab.active{background:linear-gradient(135deg,#F6C3D6,#FCE7A4) !important;border-color:#E0789F !important}
+  .slot.free{background:linear-gradient(135deg,#F6C3D6,#FCE7A4) !important}
+  .slot.sold{background:#D7D3E0 !important}
+  .legend .dot{box-shadow:0 0 0 2px #fff}
+  .count{color:#7A3B5A}
+  .hero{background:linear-gradient(135deg,#F6C3D6 0%,#FCE7A4 45%,#B9E4D2 75%,#BFD9F2 100%) !important}
+  .hero h1{color:#6B3A5E}
+
+  /* ---- tên shop: font mềm hơn ---- */
+  .hero h1{font-family:'Quicksand',"Segoe UI",Roboto,Arial,sans-serif !important;font-weight:700 !important;font-size:34px !important;letter-spacing:1px;text-transform:lowercase}
+  .hero .sub{font-family:'Quicksand',"Segoe UI",Roboto,Arial,sans-serif;font-weight:500;letter-spacing:2px}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>một xíu dễ thương</h1>
-  <div class="sub">MÓC KHÓA · DÂY ĐEO · VÒNG TAY</div>
+  <div class="hero">
+    <div class="flowers">🌸 🎀 🌸</div>
+    <h1>một xíu dễ thương</h1>
+    <div class="sub">MÓC KHÓA · DÂY ĐEO · VÒNG TAY</div>
+  </div>
   <div class="tabs">
     <button class="tab active" data-tab="tui">Chương trình túi mù tri ân</button>
     <button class="tab" data-tab="menu">Menu</button>
@@ -181,8 +271,8 @@
       tiers: "Mua 10: 22.000đ · Mua 20: 21.000đ<br>Thêm 1 bông: +3.000đ", folder: "moc-khoa" },
     { key: "DD", label: "Dây đeo", name: "Dây đeo điện thoại", price: "13.000đ",
       tiers: "Mua 10: 12.000đ · Mua 20: 11.000đ", folder: "day-deo" },
-    { key: "VT", label: "Vòng tay", name: "Vòng tay hoa", price: "20.000đ", tiers: "", folder: "vong-tay" },
-    { key: "VC", label: "Vòng charm", name: "Vòng tay charm", price: "23.000đ", tiers: "", folder: "vong-charm-ca" }
+    { key: "VT", label: "Vòng tay", name: "Vòng tay hoa", price: "20.000đ", tiers: "Mua 10: 19.000đ · Mua 20: 18.000đ", folder: "vong-tay" },
+    { key: "VC", label: "Vòng charm", name: "Vòng tay charm", price: "23.000đ", tiers: "Mua 10: 22.000đ · Mua 20: 21.000đ", folder: "vong-charm-ca" }
   ];
   const PER_PRODUCT = 10;
   let OUT = new Set();
