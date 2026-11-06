@@ -60,6 +60,9 @@
   .mcard img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;background:#F5E6D3;display:block}
   .mcard .code{position:absolute;top:6px;left:6px;background:rgba(224,120,159,.92);color:#fff;font-weight:bold;font-size:13px;padding:3px 9px;border-radius:999px;letter-spacing:1px}
   .mcard .cap{font-size:13px;margin-top:4px;font-weight:600}
+  .mcard.out img{opacity:.35;filter:grayscale(.6)}
+  .mcard .het{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:20px;color:#7A3B5A;letter-spacing:2px}
+  .mcard.out .cap{color:#8E8580}
   .contact{background:#FFFBF5;border:1.5px dashed #C9996E;border-radius:16px;padding:14px 16px;font-size:14px;line-height:1.7;margin:18px 0}
   .contact b{color:#E0789F}
 </style>
@@ -151,6 +154,8 @@
       if (!res.ok) throw new Error("bad");
       const data = await res.json();
       render(new Set((data.sold || []).map(Number)));
+      OUT = new Set((data.out || []).map(c => String(c).trim().toUpperCase()));
+      renderMenu();
       const now = new Date();
       document.getElementById("updated").textContent =
         "Cập nhật lúc " + now.toLocaleTimeString("vi-VN", {hour:"2-digit", minute:"2-digit"});
@@ -180,6 +185,7 @@
     { key: "VC", label: "Vòng charm", name: "Vòng tay charm", price: "23.000đ", tiers: "", folder: "vong-charm-ca" }
   ];
   const PER_PRODUCT = 10;
+  let OUT = new Set();
   let curProduct = 0;
 
   function renderMenu(){
@@ -190,12 +196,14 @@
     for (let n = 1; n <= PER_PRODUCT; n++){
       const code = p.key + String(n).padStart(2, "0");
       const file = `images/${p.folder}-${String(n).padStart(2, "0")}.jpg`;
-      cards += `<div class="mcard">
+      const isOut = OUT.has(code);
+      cards += `<div class="mcard ${isOut ? "out" : ""}">
         <div class="imgwrap">
           <img src="${file}" alt="${code}" loading="lazy" onerror="this.style.opacity=.25">
           <span class="code">${code}</span>
+          ${isOut ? '<span class="het">HẾT</span>' : ""}
         </div>
-        <div class="cap">${code}</div>
+        <div class="cap">${code}${isOut ? " · hết" : ""}</div>
       </div>`;
     }
     document.getElementById("menu-list").innerHTML =
