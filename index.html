@@ -50,19 +50,19 @@
   </div>
 </div>
 <script>
-  const API_URL = "https://script.google.com/macros/s/AKfycbyq3SW_FzQFcXB3Mvygu-KPJ19DPQsACdgjujRf68cscVt_mycMVKxRG7eRv-7pWa8S/exec";
+  const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSATzAGqsi9QiIbjT6Q5CLc3dMCdCYSEv9YStpqyBEEPnMibRTyf7gU4Op6VHI9UyF8MWLypcZ8guNm/pub?gid=2070850580&single=true&output=csv";
   const CODES = ["MK01","MK02","MK03","MK04","MK05","MK06","MK07","MK08","MK09","MK10"];
   let OUT = new Set();
   let IMGS = {};
   let QTY = {};
 
   function render(){
-    document.getElementById("grid").innerHTML = CODES.map(code => {
-      const isOut = OUT.has(code) || (QTY[code] !== undefined && QTY[code] <= 0);
-      const q = QTY[code];
-      const qLabel = q !== undefined ? (q > 0 ? "còn " + q : "hết") : "";
-      const hasImg = IMGS[code];
-      const imgHtml = hasImg
+    document.getElementById("grid").innerHTML = CODES.map(function(code){
+      var isOut = OUT.has(code) || (QTY[code] !== undefined && QTY[code] <= 0);
+      var q = QTY[code];
+      var qLabel = q !== undefined ? (q > 0 ? "còn " + q : "hết") : "";
+      var hasImg = IMGS[code];
+      var imgHtml = hasImg
         ? '<img src="' + IMGS[code] + '" alt="' + code + '" loading="lazy" onerror="this.outerHTML=\'<div class=ph>chưa có ảnh</div>\'">'
         : '<div class="ph">chưa có ảnh</div>';
       return '<div class="mcard ' + (isOut ? "out" : "") + '">' +
@@ -79,23 +79,39 @@
 
   render();
 
+  function parseCSV(text){
+    var lines = text.split("\n");
+    OUT = new Set();
+    IMGS = {};
+    QTY = {};
+    for (var i = 1; i < lines.length; i++){
+      var parts = lines[i].split(",");
+      var code = (parts[0] || "").trim().toUpperCase().replace(/"/g,"");
+      if (!code) continue;
+      var st = (parts[1] || "").trim().toLowerCase().replace(/"/g,"");
+      if (st === "hết" || st === "het") OUT.add(code);
+      var url = (parts[2] || "").trim().replace(/"/g,"");
+      if (url) {
+        var match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+        if (match) url = "https://lh3.googleusercontent.com/d/" + match[1];
+        IMGS[code] = url;
+      }
+      var q = (parts[3] || "").trim().replace(/"/g,"");
+      if (q !== "") QTY[code] = Number(q);
+    }
+    render();
+  }
+
   async function load(){
     try {
-      const res = await fetch(API_URL + "?t=" + Date.now(), {cache:"no-store"});
+      var res = await fetch(CSV_URL + "&t=" + Date.now());
       if (!res.ok) throw new Error("bad");
-      const data = await res.json();
-      OUT = new Set((data.out || []).map(c => String(c).trim().toUpperCase()));
-      IMGS = {};
-      QTY = {};
-      var imgs = data.imgs || {};
-      var qty = data.qty || {};
-      for (var k in imgs) IMGS[k.toUpperCase()] = imgs[k];
-      for (var k in qty) QTY[k.toUpperCase()] = Number(qty[k]);
-      render();
+      var text = await res.text();
+      parseCSV(text);
     } catch(e){}
   }
   load();
-  setInterval(load, 30000);
+  setInterval(load, 60000);
 </script>
 </body>
 </html>
