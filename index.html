@@ -3,325 +3,100 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Những mẫu còn hàng</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
-<title>Một Xíu Dễ Thương · Menu & Túi mù</title>
 <style>
-  body{margin:0;background:#FFF6EC;color:#A0694A;font-family:-apple-system,system-ui,"Segoe UI",Roboto,Arial,sans-serif;padding:20px 14px 40px}
-  .wrap{max-width:560px;margin:0 auto}
-  h1{text-align:center;font-weight:600;font-size:30px;margin:10px 0 2px}
-  .sub{text-align:center;color:#C9996E;letter-spacing:3px;font-size:12px;margin-bottom:18px}
-  h2.sec{text-align:center;font-weight:600;font-size:20px;margin:26px 0 12px;color:#A0694A}
-  .menu{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .item{background:#FFFBF5;border:1.5px dashed #C9996E;border-radius:16px;padding:10px;text-align:center}
-  .item img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;background:#F5E6D3;display:block}
-  .item .ph{width:100%;aspect-ratio:1;border-radius:12px;background:#F5E6D3;color:#C9996E;font-size:13px;display:flex;align-items:center;justify-content:center}
-  .item .name{font-weight:600;font-size:16px;margin:8px 0 2px}
-  .item .price{color:#E0789F;font-weight:bold;font-size:15px}
-  .item .tiers{font-size:12px;color:#A0694A;margin-top:4px;line-height:1.5}
-  .ship{background:#F5E6D3;border-radius:14px;padding:12px 14px;font-size:14px;line-height:1.6;margin-top:14px}
-  .legend{display:flex;gap:18px;justify-content:center;font-size:14px;margin:6px 0 12px}
-  .dot{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:6px}
-  .count{text-align:center;font-size:15px;font-weight:600;margin-bottom:4px}
-  .updated{text-align:center;font-size:12px;color:#C9996E;margin-bottom:10px}
-  .status{text-align:center;font-size:13px;color:#E0789F;min-height:18px;margin-bottom:10px}
-  .card{background:#FFFBF5;border:1.5px dashed #C9996E;border-radius:18px;padding:14px;margin-bottom:18px}
-  .card h3{font-weight:600;font-size:19px;margin:2px 0;text-align:center}
-  .card .price{text-align:center;color:#E0789F;font-weight:bold;margin-bottom:12px}
-  .grid{display:grid;grid-template-columns:repeat(10,1fr);gap:6px}
-  .slot{aspect-ratio:1;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:bold}
-  .free{background:#F6C3D6;color:#7A3B5A}
-  .sold{background:#D5CDC8;color:#8E8580;text-decoration:line-through}
-  .note{background:#FCEBF2;border-radius:16px;padding:14px 16px;font-size:14px;line-height:1.6}
-  .note b{color:#E0789F}
-  .syntax{background:#fff;border-radius:10px;padding:10px 12px;margin:8px 0;border:1px solid #F0D9C8}
-  .tabs{display:flex;gap:10px;margin:6px 0 18px}
-  .tab{flex:1;border:1.5px solid #C9996E;background:#FFFBF5;color:#A0694A;border-radius:14px;padding:12px 8px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit}
-  .tab.active{background:#F6C3D6;color:#7A3B5A;border-color:#E0789F}
-  .hidden{display:none}
-  .gal{position:relative}
-  .gal .main{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;background:#F5E6D3;display:block}
-  .gal .nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,251,245,.85);border:none;border-radius:50%;width:32px;height:32px;font-size:18px;cursor:pointer;color:#A0694A}
-  .gal .prev{left:6px}.gal .next{right:6px}
-  .gal .dots{text-align:center;margin-top:6px;font-size:12px;color:#C9996E}
-  .item{margin-bottom:14px}
-  .item .name{font-weight:600;font-size:17px;margin:8px 0 2px;text-align:center}
-  .item .price{color:#E0789F;font-weight:bold;font-size:15px;text-align:center}
-  .item .tiers{font-size:13px;color:#A0694A;margin-top:4px;line-height:1.5;text-align:center}
-  #menu-list{max-width:560px;margin:0 auto}
-  .chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:12px;-webkit-overflow-scrolling:touch}
-  .chip{flex:0 0 auto;border:1.5px solid #C9996E;background:#FFFBF5;color:#A0694A;border-radius:999px;padding:8px 14px;font-size:14px;cursor:pointer;font-family:inherit}
-  .chip.active{background:#F6C3D6;color:#7A3B5A;border-color:#E0789F}
-  .pinfo{text-align:center;margin-bottom:12px}
-  .pinfo .pname{font-weight:600;font-size:18px}
-  .pinfo .pprice{color:#E0789F;font-weight:bold;font-size:16px;margin-top:2px}
-  .pinfo .ptiers{font-size:13px;margin-top:4px;line-height:1.5}
-  .mgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-  .mcard{background:#FFFBF5;border:1.5px dashed #C9996E;border-radius:14px;padding:6px;text-align:center}
-  .mcard .imgwrap{position:relative}
-  .mcard img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;background:#F5E6D3;display:block}
-  .mcard .code{position:absolute;top:6px;left:6px;background:rgba(224,120,159,.92);color:#fff;font-weight:bold;font-size:13px;padding:3px 9px;border-radius:999px;letter-spacing:1px}
-  .mcard .cap{font-size:13px;margin-top:4px;font-weight:600}
-  .mcard.out img{opacity:.35;filter:grayscale(.6)}
-  .mcard .het{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:20px;color:#7A3B5A;letter-spacing:2px}
-  .mcard.out .cap{color:#8E8580}
-  .contact{background:#FFFBF5;border:1.5px dashed #C9996E;border-radius:16px;padding:14px 16px;font-size:14px;line-height:1.7;margin:18px 0}
-  .contact b{color:#E0789F}
-
-  /* ---- làm đẹp tab menu ---- */
-  body{background:
-    radial-gradient(circle at 8% 12%, rgba(246,195,214,.45) 0 26px, transparent 27px),
-    radial-gradient(circle at 92% 8%, rgba(201,176,234,.40) 0 20px, transparent 21px),
-    radial-gradient(circle at 15% 55%, rgba(142,213,195,.35) 0 18px, transparent 19px),
-    radial-gradient(circle at 88% 60%, rgba(252,217,122,.40) 0 22px, transparent 23px),
-    radial-gradient(circle at 50% 98%, rgba(246,195,214,.40) 0 30px, transparent 31px),
-    #FFF6EC}
-  .hero{background:linear-gradient(135deg,#F6C3D6 0%,#F5E0EC 55%,#FFF6EC 100%);border-radius:22px;padding:18px 16px 16px;text-align:center;margin-bottom:6px;box-shadow:0 4px 14px rgba(160,105,74,.10)}
-  .hero .flowers{font-size:22px;letter-spacing:6px;margin-bottom:4px}
-  .hero h1{margin:0;font-size:30px;color:#7A3B5A}
-  .hero .sub{margin-top:6px;color:#A0694A}
-  .tabs .tab{box-shadow:0 3px 8px rgba(160,105,74,.12)}
-  .chips{justify-content:center;flex-wrap:wrap}
-  .chip{box-shadow:0 2px 6px rgba(160,105,74,.10);font-weight:600}
-  .chip.active{box-shadow:0 4px 10px rgba(224,120,159,.35)}
-  .pinfo{background:#FFFBF5;border-radius:18px;padding:14px 12px;box-shadow:0 3px 12px rgba(160,105,74,.10);margin-bottom:14px;border:1.5px solid #F5D7E3}
-  .pinfo .pname{font-size:20px;color:#7A3B5A}
-  .pinfo .pprice{display:inline-block;background:#F6C3D6;color:#7A3B5A;border-radius:999px;padding:4px 14px;margin-top:6px;font-weight:bold}
-  .mgrid{gap:12px}
-  .mcard{border:none;background:#FFFBF5;border-radius:18px;padding:8px;box-shadow:0 4px 12px rgba(160,105,74,.12);transition:transform .15s}
-  .mcard:active{transform:scale(.97)}
-  .mcard img{border-radius:14px}
-  .mcard .code{background:linear-gradient(135deg,#F07BA4,#E0789F);box-shadow:0 2px 6px rgba(224,120,159,.45)}
-  .mcard .cap{margin-top:6px;color:#7A3B5A;letter-spacing:1px}
-  .ship{background:#FFFBF5;border-radius:18px;padding:14px 16px;box-shadow:0 3px 12px rgba(160,105,74,.10);border:1.5px solid #F5D7E3}
-  .ship b{color:#E0789F}
-  .sec{position:relative}
-  .sec:before,.sec:after{content:"✿";color:#E0789F;margin:0 8px;font-size:16px}
-  .contact{background:#FFFBF5;border-radius:18px;box-shadow:0 3px 12px rgba(160,105,74,.10);border:1.5px solid #F5D7E3}
-  .note{border-radius:18px}
-  .card{border:none;box-shadow:0 4px 14px rgba(160,105,74,.10);background:#FFFBF5}
-  .card .price{background:#F6C3D6;color:#7A3B5A;border-radius:999px;display:inline-block;padding:3px 12px;font-size:13px}
-  .card{text-align:center}
-
-  /* ---- menu ảnh: kiểu polaroid ---- */
-  .mgrid{grid-template-columns:repeat(2,1fr);gap:16px;padding:4px 2px 10px}
-  .mcard{background:#FFFFFF;border:none;border-radius:6px;padding:10px 10px 14px;box-shadow:0 6px 16px rgba(160,105,74,.16),0 1px 3px rgba(160,105,74,.10);position:relative;transition:transform .18s}
+  body{margin:0;background:linear-gradient(170deg,#FFF3E4 0%,#FDE8F0 35%,#EEF8F3 70%,#E6F0FB 100%) fixed;color:#A0694A;font-family:'Quicksand',"Segoe UI",Roboto,Arial,sans-serif;padding:16px 12px 40px}
+  .wrap{max-width:520px;margin:0 auto}
+  h1{text-align:center;font-weight:700;font-size:24px;margin:10px 0 14px;color:#7A3B5A}
+  .mgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .mcard{background:#FFFFFF;border:none;border-radius:6px;padding:10px 10px 14px;box-shadow:0 6px 16px rgba(160,105,74,.16);position:relative;transition:transform .18s}
   .mcard:nth-child(odd){transform:rotate(-1.2deg)}
   .mcard:nth-child(even){transform:rotate(1.2deg)}
-  .mcard:hover,.mcard:active{transform:rotate(0deg) scale(1.02)}
-  .mcard:before{content:"";position:absolute;top:-7px;left:50%;transform:translateX(-50%) rotate(-3deg);width:54px;height:16px;background:rgba(246,195,214,.85);border-radius:2px;z-index:2}
-  .mcard .imgwrap{border-radius:3px;overflow:hidden}
-  .mcard img{border-radius:3px}
-  .mcard .code{top:8px;left:8px;background:#E0789F;box-shadow:none;font-size:12px;padding:3px 10px;z-index:3}
-  .mcard .cap{margin-top:10px;font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:16px;letter-spacing:1px;color:#7A3B5A}
-  .pinfo{background:linear-gradient(180deg,#FFFBF5,#FCEBF2);border-radius:20px;position:relative;overflow:hidden}
-  .pinfo:after{content:"✿ ✿ ✿";position:absolute;right:12px;top:8px;color:#F0A6C2;font-size:12px;letter-spacing:4px}
-  .pinfo .pname{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:22px}
-  #menu-list{max-width:520px}
-
-  /* ---- pha màu pastel: vàng, xanh lá, xanh dương ---- */
+  .mcard:active{transform:rotate(0deg) scale(1.02)}
+  .mcard:before{content:"";position:absolute;top:-7px;left:50%;transform:translateX(-50%) rotate(-3deg);width:54px;height:16px;border-radius:2px;z-index:2}
   .mcard:nth-child(4n+1):before{background:rgba(252,217,122,.9)}
   .mcard:nth-child(4n+2):before{background:rgba(160,220,190,.9)}
   .mcard:nth-child(4n+3):before{background:rgba(160,200,240,.9)}
   .mcard:nth-child(4n+4):before{background:rgba(246,195,214,.9)}
+  .mcard .imgwrap{position:relative;border-radius:3px;overflow:hidden}
+  .mcard img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:3px;background:#F5E6D3;display:block}
+  .mcard .code{position:absolute;top:8px;left:8px;color:#fff;font-weight:700;font-size:12px;padding:3px 10px;border-radius:999px;z-index:3}
   .mcard:nth-child(4n+1) .code{background:#E9B93F}
   .mcard:nth-child(4n+2) .code{background:#6DBE9A}
   .mcard:nth-child(4n+3) .code{background:#6FA8DC}
   .mcard:nth-child(4n+4) .code{background:#E0789F}
-  .mcard .cap{color:#6B5A4F}
-  .pinfo{background:linear-gradient(135deg,#FFF9DB 0%,#E6F6EE 50%,#E3EEFB 100%);border:1.5px solid #CFE6F2}
-  .pinfo .pprice{background:#FCE7A4;color:#7A5A1E}
-  .chip.active{background:linear-gradient(135deg,#F6C3D6,#FCE7A4);color:#7A3B5A}
-  .chip{border-color:#A9D8C4}
-
-  /* ---- nền có màu, không trắng trơn ---- */
-  html,body{background:linear-gradient(170deg,#FFF3E4 0%,#FDE8F0 35%,#EEF8F3 70%,#E6F0FB 100%) fixed !important}
-  .card{background:linear-gradient(160deg,#FFFFFF 0%,#FFF8DC 100%) !important;border:2px solid #F5D7E3 !important}
-  .note{background:linear-gradient(160deg,#FCE4EE 0%,#E8F7F0 100%) !important;border:2px solid #CFE9DD}
-  .contact{background:linear-gradient(160deg,#FFF8DC 0%,#E3EEFB 100%) !important;border:2px solid #CFE6F2 !important}
-  .ship{background:linear-gradient(160deg,#FFF8DC 0%,#FCE4EE 50%,#E6F5EE 100%) !important;border:2px solid #F5D7E3 !important}
-  .mcard{background:linear-gradient(160deg,#FFFFFF 0%,#FFF9E6 100%) !important}
-  .tab{background:linear-gradient(135deg,#FFF8DC,#E6F5EE) !important;border:2px solid #D9B8C6 !important}
-  .tab.active{background:linear-gradient(135deg,#F6C3D6,#FCE7A4) !important;border-color:#E0789F !important}
-  .slot.free{background:linear-gradient(135deg,#F6C3D6,#FCE7A4) !important}
-  .slot.sold{background:#D7D3E0 !important}
-  .legend .dot{box-shadow:0 0 0 2px #fff}
-  .count{color:#7A3B5A}
-  .hero{background:linear-gradient(135deg,#F6C3D6 0%,#FCE7A4 45%,#B9E4D2 75%,#BFD9F2 100%) !important}
-  .hero h1{color:#6B3A5E}
-
-  /* ---- tên shop: font mềm hơn ---- */
-  .hero h1{font-family:'Quicksand',"Segoe UI",Roboto,Arial,sans-serif !important;font-weight:700 !important;font-size:34px !important;letter-spacing:1px;text-transform:lowercase}
-  .hero .sub{font-family:'Quicksand',"Segoe UI",Roboto,Arial,sans-serif;font-weight:500;letter-spacing:2px}
+  .mcard .qty{position:absolute;bottom:8px;right:8px;background:rgba(255,255,255,.92);color:#7A3B5A;font-weight:700;font-size:12px;padding:3px 10px;border-radius:999px;z-index:3}
+  .mcard .cap{margin-top:10px;font-family:'Quicksand',sans-serif;font-weight:700;font-size:14px;letter-spacing:.5px;color:#7A3B5A;text-align:center}
+  .mcard.out img{opacity:.35;filter:grayscale(.6)}
+  .mcard .het{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:20px;color:#7A3B5A;letter-spacing:2px}
+  .mcard.out .cap{color:#8E8580}
+  .contact{background:#FFFBF5;border-radius:16px;padding:14px 16px;font-size:14px;line-height:1.7;margin:18px 0;box-shadow:0 3px 12px rgba(160,105,74,.10);border:1.5px solid #F5D7E3}
+  .contact b{color:#E0789F}
   .lnk{color:#7A3B5A;text-decoration:none;border-bottom:1.5px dashed #E0789F;padding-bottom:1px}
-
-  /* ---- sửa font nhãn mã sản phẩm, giữ ô túi mù như cũ ---- */
-  .mcard .cap{font-family:'Quicksand',"Segoe UI",Roboto,Arial,sans-serif !important;font-style:normal !important;font-weight:700 !important;letter-spacing:.5px !important;font-size:14px !important}
-  .mcard .code{font-family:'Quicksand',"Segoe UI",Roboto,Arial,sans-serif !important;font-weight:700 !important;letter-spacing:.5px !important}
-  .slot.free{background:#F6C3D6 !important;color:#7A3B5A !important}
-  .slot.sold{background:#D5CDC8 !important;color:#8E8580 !important}
+  .status{text-align:center;font-size:13px;color:#E0789F;min-height:18px;margin-bottom:10px}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="hero">
-    <div class="flowers">🌸 🎀 🌸</div>
-    <h1>một xíu dễ thương</h1>
-    <div class="sub">MÓC KHÓA · DÂY ĐEO · VÒNG TAY</div>
-  </div>
-  <div class="tabs">
-    <button class="tab active" data-tab="tui">Chương trình túi mù tri ân</button>
-    <button class="tab" data-tab="menu">Menu</button>
-  </div>
-
-  <div class="view hidden" id="view-menu">
-  <h2 class="sec">Menu</h2>
-  <div id="menu-list"></div>
-
-  <div class="ship">
-    <b>Combo vòng tay thường:</b> Vòng tay + Móc khóa 42.000đ · Vòng tay + Dây đeo 32.000đ<br>
-    <b>Combo vòng charm:</b> Vòng charm + Móc khóa 44.000đ · Vòng charm + Dây đeo 34.000đ<br>
-    <b>Combo 2 món:</b> Móc khóa + Dây đeo 34.000đ<br>
-    <b>Combo 3 món:</b> Móc khóa + Dây đeo + Vòng tay 55.000đ · Móc khóa + Dây đeo + Vòng charm 56.000đ<br>
-    <b>Ship:</b> TP.HCM 15.000đ · Tỉnh 20.000đ (từ 3 sản phẩm)<br>
-    <b>Freeship:</b> đơn trên 250.000đ toàn quốc, và nhận tại cổng csc ĐH Sài Gòn / cổng csc ĐH Sư phạm<br>
-    <b>Nhận trực tiếp:</b> 271/4 An Dương Vương, P. Chợ Quán, TP.HCM(hẻm kế bên ngân hàng BIDV 271 ADV )<br>
-    Khách chọn mẫu có sẵn hoặc mix theo yêu cầu. Đơn có yêu cầu nhiều hoa, cầu kỳ, shop sẽ báo giá trước khi chốt.
-    Hiện tại shop không nhận gói quà ạ.
-  </div>
-
-  </div>
-  <div class="view" id="view-tui">
-  <h2 class="sec">Túi mù tri ân</h2>
-  <div class="legend">
-    <span><span class="dot" style="background:#F6C3D6"></span>còn trống</span>
-    <span><span class="dot" style="background:#D5CDC8"></span>đã hết</span>
-  </div>
-  <div class="count" id="count">Đang tải...</div>
-  <div class="updated" id="updated"></div>
-  <div class="status" id="status"></div>
-
-  <div class="card">
-    <h3>Túi mù 10k</h3>
-    <div class="price">Secret: 2 cái / túi · Dây đeo điện thoại</div>
-    <div class="grid" id="grid1"></div>
-  </div>
-  <div class="card">
-    <h3>Túi mù 20k</h3>
-    <div class="price">Secret: 2 cái / túi · Móc khóa &amp; vòng tay</div>
-    <div class="grid" id="grid2"></div>
-  </div>
-
-  <div class="note">
-    <b>Cách chốt:</b> nhắn tin shop qua Messenger hoặc Instagram để chốt, theo mẫu:
-    <div class="syntax">Số túi mù bạn chọn_địa chỉ nhận_giờ nhận_ngày nhận</div>
-    VD: <i>62,5,19_Đại học Sài gòn_13h_ngày 27/11</i><br>
-    Nếu bạn tự lấy tại shop thì ghi địa chỉ là <b>"tự lấy"</b>.<br><br>
-    Giờ giao hàng shop sẽ sắp xếp và báo lại bạn.<br><br>
-    Khi chương trình kết thúc, shop sẽ đăng ảnh toàn bộ các túi mù trước khi được bán để khách check nha.<br><br>
-    Ô <b>màu hồng</b> là túi còn trống, ô <b>màu xám</b> là đã hết. Nếu trang chưa cập nhật kịp, bạn thông cảm giúp shop nha 🌸
-  </div>
-  </div>
+  <h1>những mẫu còn hàng</h1>
+  <div class="status" id="status">Đang tải...</div>
+  <div class="mgrid" id="grid"></div>
   <div class="contact">
-    <b>Liên hệ đặt hàng:</b> nhắn tin qua Messenger/Instagram<br>
-    Facebook: <a class="lnk" href="https://facebook.com/motxiudethuong05" target="_blank" rel="noopener"><b>Một xíu dễ thương</b></a> <i>(chạm vào để thấy mình ạ)</i><br>
-    Instagram: <a class="lnk" href="https://www.instagram.com/justa_littlecute05/" target="_blank" rel="noopener"><b>justa_littlecute05</b></a><br><br>
-    <b>Thanh toán:</b> đơn dưới 300.000đ thanh toán khi nhận hàng, không cọc, không cần chuyển khoản trước.<br>Đơn trên 300.000đ cọc 50% đơn hàng ạ.
+    <b>Đặt hàng qua</b> <a class="lnk" href="https://www.facebook.com/share/1WxKmdwPJn/?mibextid=wwXIfr" target="_blank" rel="noopener"><b>Facebook</b></a> <i>(chạm vào để thấy mình ạ)</i><br>
+    <b>Theo dõi</b> <a class="lnk" href="https://www.instagram.com/justa_littlecute05/" target="_blank" rel="noopener"><b>Instagram</b></a> để xem các mẫu mới shop cập nhật<br><br>
+    Freeship csc Trường Đại Học Sài Gòn<br>
+    Freeship cổng chính Trường Đại Học Sư Phạm<br>
+    Nhận hàng trực tiếp: 271/4 An Dương Vương, P. Chợ Quán, TP.HCM
   </div>
 </div>
-
 <script>
-  // Dán link Web App của Google Apps Script vào đây
   const API_URL = "https://script.google.com/macros/s/AKfycbyq3SW_FzQFcXB3Mvygu-KPJ19DPQsACdgjujRf68cscVt_mycMVKxRG7eRv-7pWa8S/exec";
-  const TOTAL = 100;
+  let OUT = new Set();
+  let IMGS = {};
+  let QTY = {};
 
-  function render(soldSet){
-    let a = "", b = "";
-    for (let i = 1; i <= TOTAL; i++){
-      const html = `<div class="slot ${soldSet.has(i) ? "sold" : "free"}">${i}</div>`;
-      if (i <= 50) a += html; else b += html;
+  function render(){
+    const grid = document.getElementById("grid");
+    const codes = Object.keys(IMGS).sort();
+    if (codes.length === 0){
+      grid.innerHTML = '';
+      return;
     }
-    document.getElementById("grid1").innerHTML = a;
-    document.getElementById("grid2").innerHTML = b;
-    document.getElementById("count").textContent = `Còn trống: ${TOTAL - soldSet.size} / ${TOTAL} túi`;
+    grid.innerHTML = codes.map(code => {
+      const isOut = OUT.has(code) || (QTY[code] !== undefined && QTY[code] <= 0);
+      const q = QTY[code];
+      const qLabel = q !== undefined ? (q > 0 ? `còn ${q}` : 'hết') : '';
+      return `<div class="mcard ${isOut ? 'out' : ''}">
+        <div class="imgwrap">
+          <img src="${IMGS[code]}" alt="${code}" loading="lazy" onerror="this.style.opacity=.25">
+          <span class="code">${code}</span>
+          ${qLabel ? `<span class="qty">${qLabel}</span>` : ''}
+          ${isOut ? '<span class="het">HẾT</span>' : ''}
+        </div>
+        <div class="cap">${code}</div>
+      </div>`;
+    }).join('');
   }
 
   async function load(){
     try {
-      const res = await fetch(API_URL + "?t=" + Date.now(), { cache: "no-store" });
+      const res = await fetch(API_URL + "?t=" + Date.now(), {cache:"no-store"});
       if (!res.ok) throw new Error("bad");
       const data = await res.json();
-      render(new Set((data.sold || []).map(Number)));
       OUT = new Set((data.out || []).map(c => String(c).trim().toUpperCase()));
-      renderMenu();
-      const now = new Date();
-      document.getElementById("updated").textContent =
-        "Cập nhật lúc " + now.toLocaleTimeString("vi-VN", {hour:"2-digit", minute:"2-digit"});
+      IMGS = {};
+      QTY = {};
+      const imgs = data.imgs || {};
+      const qty = data.qty || {};
+      for (const k in imgs) { IMGS[k.toUpperCase()] = imgs[k]; }
+      for (const k in qty) { QTY[k.toUpperCase()] = Number(qty[k]); }
+      render();
       document.getElementById("status").textContent = "";
-    } catch (e) {
-      document.getElementById("status").textContent = "Chưa tải được danh sách, bạn tải lại trang nha";
+    } catch(e){
+      document.getElementById("status").textContent = "Chưa tải được, bạn tải lại trang nha";
     }
   }
-
-  document.querySelectorAll('.tab').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById('view-tui').classList.toggle('hidden', btn.dataset.tab !== 'tui');
-      document.getElementById('view-menu').classList.toggle('hidden', btn.dataset.tab !== 'menu');
-      window.scrollTo({top:0});
-    });
-  });
-
-
-  const PRODUCTS = [
-    { key: "MK", label: "Móc khóa", name: "Móc khóa hoa", price: "23.000đ",
-      tiers: "Mua 10: 22.000đ · Mua 20: 21.000đ<br>Thêm 1 bông: +3.000đ", folder: "moc-khoa" },
-    { key: "DD", label: "Dây đeo", name: "Dây đeo điện thoại", price: "13.000đ",
-      tiers: "Mua 10: 12.000đ · Mua 20: 11.000đ", folder: "day-deo" },
-    { key: "VT", label: "Vòng tay", name: "Vòng tay hoa", price: "22.000đ", tiers: "Mua 10: 21.000đ · Mua 20: 20.000đ", folder: "vong-tay" },
-    { key: "VC", label: "Vòng charm", name: "Vòng tay charm", price: "23.000đ", tiers: "Mua 10: 22.000đ · Mua 20: 21.000đ", folder: "vong-charm-ca" }
-  ];
-  const PER_PRODUCT = 10;
-  let OUT = new Set();
-  let curProduct = 0;
-
-  function renderMenu(){
-    const p = PRODUCTS[curProduct];
-    const chips = PRODUCTS.map((x, i) =>
-      `<button class="chip ${i===curProduct?'active':''}" data-i="${i}">${x.label}</button>`).join("");
-    let cards = "";
-    for (let n = 1; n <= PER_PRODUCT; n++){
-      const code = p.key + String(n).padStart(2, "0");
-      const file = `images/${p.folder}-${String(n).padStart(2, "0")}.jpg`;
-      const isOut = OUT.has(code);
-      cards += `<div class="mcard ${isOut ? "out" : ""}">
-        <div class="imgwrap">
-          <img src="${file}" alt="${code}" loading="lazy" onerror="this.style.opacity=.25">
-          <span class="code">${code}</span>
-          ${isOut ? '<span class="het">HẾT</span>' : ""}
-        </div>
-        <div class="cap">${code}${isOut ? " · hết" : ""}</div>
-      </div>`;
-    }
-    document.getElementById("menu-list").innerHTML =
-      `<div class="chips">${chips}</div>
-       <div class="pinfo">
-         <div class="pname">${p.name}</div>
-         <div class="pprice">${p.price}</div>
-         ${p.tiers ? `<div class="ptiers">${p.tiers}</div>` : ""}
-       </div>
-       <div class="mgrid">${cards}</div>`;
-  }
-
-  document.getElementById("menu-list").addEventListener("click", (e) => {
-    const chip = e.target.closest(".chip");
-    if (!chip) return;
-    curProduct = Number(chip.dataset.i);
-    renderMenu();
-  });
-
-  renderMenu();
-
   load();
   setInterval(load, 30000);
 </script>
