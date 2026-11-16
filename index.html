@@ -21,26 +21,25 @@
   .mcard:nth-child(4n+4):before{background:rgba(246,195,214,.9)}
   .mcard .imgwrap{position:relative;border-radius:3px;overflow:hidden}
   .mcard img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:3px;background:#F5E6D3;display:block}
+  .mcard .ph{width:100%;aspect-ratio:1;border-radius:3px;background:#F5E6D3;display:flex;align-items:center;justify-content:center;color:#C9996E;font-size:13px}
   .mcard .code{position:absolute;top:8px;left:8px;color:#fff;font-weight:700;font-size:12px;padding:3px 10px;border-radius:999px;z-index:3}
   .mcard:nth-child(4n+1) .code{background:#E9B93F}
   .mcard:nth-child(4n+2) .code{background:#6DBE9A}
   .mcard:nth-child(4n+3) .code{background:#6FA8DC}
   .mcard:nth-child(4n+4) .code{background:#E0789F}
   .mcard .qty{position:absolute;bottom:8px;right:8px;background:rgba(255,255,255,.92);color:#7A3B5A;font-weight:700;font-size:12px;padding:3px 10px;border-radius:999px;z-index:3}
-  .mcard .cap{margin-top:10px;font-family:'Quicksand',sans-serif;font-weight:700;font-size:14px;letter-spacing:.5px;color:#7A3B5A;text-align:center}
-  .mcard.out img{opacity:.35;filter:grayscale(.6)}
-  .mcard .het{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:20px;color:#7A3B5A;letter-spacing:2px}
+  .mcard .cap{margin-top:10px;font-weight:700;font-size:14px;letter-spacing:.5px;color:#7A3B5A;text-align:center}
+  .mcard.out img,.mcard.out .ph{opacity:.35;filter:grayscale(.6)}
+  .mcard .het{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:20px;color:#7A3B5A;letter-spacing:2px;z-index:4}
   .mcard.out .cap{color:#8E8580}
   .contact{background:#FFFBF5;border-radius:16px;padding:14px 16px;font-size:14px;line-height:1.7;margin:18px 0;box-shadow:0 3px 12px rgba(160,105,74,.10);border:1.5px solid #F5D7E3}
   .contact b{color:#E0789F}
   .lnk{color:#7A3B5A;text-decoration:none;border-bottom:1.5px dashed #E0789F;padding-bottom:1px}
-  .status{text-align:center;font-size:13px;color:#E0789F;min-height:18px;margin-bottom:10px}
 </style>
 </head>
 <body>
 <div class="wrap">
   <h1>những mẫu còn hàng</h1>
-  <div class="status" id="status">Đang tải...</div>
   <div class="mgrid" id="grid"></div>
   <div class="contact">
     <b>Đặt hàng qua</b> <a class="lnk" href="https://www.facebook.com/share/1WxKmdwPJn/?mibextid=wwXIfr" target="_blank" rel="noopener"><b>Facebook</b></a> <i>(chạm vào để thấy mình ạ)</i><br>
@@ -52,32 +51,33 @@
 </div>
 <script>
   const API_URL = "https://script.google.com/macros/s/AKfycbyq3SW_FzQFcXB3Mvygu-KPJ19DPQsACdgjujRf68cscVt_mycMVKxRG7eRv-7pWa8S/exec";
+  const CODES = ["MK01","MK02","MK03","MK04","MK05","MK06","MK07","MK08","MK09","MK10"];
   let OUT = new Set();
   let IMGS = {};
   let QTY = {};
 
   function render(){
-    const grid = document.getElementById("grid");
-    const codes = Object.keys(IMGS).sort();
-    if (codes.length === 0){
-      grid.innerHTML = '';
-      return;
-    }
-    grid.innerHTML = codes.map(code => {
+    document.getElementById("grid").innerHTML = CODES.map(code => {
       const isOut = OUT.has(code) || (QTY[code] !== undefined && QTY[code] <= 0);
       const q = QTY[code];
-      const qLabel = q !== undefined ? (q > 0 ? `còn ${q}` : 'hết') : '';
-      return `<div class="mcard ${isOut ? 'out' : ''}">
-        <div class="imgwrap">
-          <img src="${IMGS[code]}" alt="${code}" loading="lazy" onerror="this.style.opacity=.25">
-          <span class="code">${code}</span>
-          ${qLabel ? `<span class="qty">${qLabel}</span>` : ''}
-          ${isOut ? '<span class="het">HẾT</span>' : ''}
-        </div>
-        <div class="cap">${code}</div>
-      </div>`;
-    }).join('');
+      const qLabel = q !== undefined ? (q > 0 ? "còn " + q : "hết") : "";
+      const hasImg = IMGS[code];
+      const imgHtml = hasImg
+        ? '<img src="' + IMGS[code] + '" alt="' + code + '" loading="lazy" onerror="this.outerHTML=\'<div class=ph>chưa có ảnh</div>\'">'
+        : '<div class="ph">chưa có ảnh</div>';
+      return '<div class="mcard ' + (isOut ? "out" : "") + '">' +
+        '<div class="imgwrap">' +
+          imgHtml +
+          '<span class="code">' + code + '</span>' +
+          (qLabel ? '<span class="qty">' + qLabel + '</span>' : '') +
+          (isOut ? '<span class="het">HẾT</span>' : '') +
+        '</div>' +
+        '<div class="cap">' + code + '</div>' +
+      '</div>';
+    }).join("");
   }
+
+  render();
 
   async function load(){
     try {
@@ -87,15 +87,12 @@
       OUT = new Set((data.out || []).map(c => String(c).trim().toUpperCase()));
       IMGS = {};
       QTY = {};
-      const imgs = data.imgs || {};
-      const qty = data.qty || {};
-      for (const k in imgs) { IMGS[k.toUpperCase()] = imgs[k]; }
-      for (const k in qty) { QTY[k.toUpperCase()] = Number(qty[k]); }
+      var imgs = data.imgs || {};
+      var qty = data.qty || {};
+      for (var k in imgs) IMGS[k.toUpperCase()] = imgs[k];
+      for (var k in qty) QTY[k.toUpperCase()] = Number(qty[k]);
       render();
-      document.getElementById("status").textContent = "";
-    } catch(e){
-      document.getElementById("status").textContent = "Chưa tải được, bạn tải lại trang nha";
-    }
+    } catch(e){}
   }
   load();
   setInterval(load, 30000);
