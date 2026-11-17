@@ -3,47 +3,70 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Những mẫu còn hàng</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+<title>Móc khóa & Dây đeo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&family=Pacifico&display=swap" rel="stylesheet">
 <style>
-  body{margin:0;background:linear-gradient(170deg,#FFF3E4 0%,#FDE8F0 35%,#EEF8F3 70%,#E6F0FB 100%) fixed;color:#A0694A;font-family:'Quicksand',"Segoe UI",Roboto,Arial,sans-serif;padding:16px 12px 40px}
-  .wrap{max-width:520px;margin:0 auto}
-  h1{text-align:center;font-weight:700;font-size:24px;margin:10px 0 14px;color:#7A3B5A}
-  .mgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-  .mcard{background:#FFFFFF;border:none;border-radius:6px;padding:10px 10px 14px;box-shadow:0 6px 16px rgba(160,105,74,.16);position:relative;transition:transform .18s}
-  .mcard:nth-child(odd){transform:rotate(-1.2deg)}
-  .mcard:nth-child(even){transform:rotate(1.2deg)}
-  .mcard:active{transform:rotate(0deg) scale(1.02)}
-  .mcard:before{content:"";position:absolute;top:-7px;left:50%;transform:translateX(-50%) rotate(-3deg);width:54px;height:16px;border-radius:2px;z-index:2}
-  .mcard:nth-child(4n+1):before{background:rgba(252,217,122,.9)}
-  .mcard:nth-child(4n+2):before{background:rgba(160,220,190,.9)}
-  .mcard:nth-child(4n+3):before{background:rgba(160,200,240,.9)}
-  .mcard:nth-child(4n+4):before{background:rgba(246,195,214,.9)}
-  .mcard .imgwrap{position:relative;border-radius:3px;overflow:hidden}
-  .mcard img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:3px;background:#F5E6D3;display:block}
-  .mcard .ph{width:100%;aspect-ratio:1;border-radius:3px;background:#F5E6D3;display:flex;align-items:center;justify-content:center;color:#C9996E;font-size:13px}
-  .mcard .code{position:absolute;top:8px;left:8px;color:#fff;font-weight:700;font-size:12px;padding:3px 10px;border-radius:999px;z-index:3}
-  .mcard:nth-child(4n+1) .code{background:#E9B93F}
-  .mcard:nth-child(4n+2) .code{background:#6DBE9A}
-  .mcard:nth-child(4n+3) .code{background:#6FA8DC}
-  .mcard:nth-child(4n+4) .code{background:#E0789F}
-  .mcard .qty{position:absolute;bottom:8px;right:8px;background:rgba(255,255,255,.92);color:#7A3B5A;font-weight:700;font-size:12px;padding:3px 10px;border-radius:999px;z-index:3}
-  .mcard .price-tag{position:absolute;top:8px;right:8px;background:rgba(224,120,159,.92);color:#fff;font-weight:700;font-size:12px;padding:3px 10px;border-radius:999px;z-index:3}
-  .mcard .cap{margin-top:10px;font-weight:700;font-size:14px;letter-spacing:.5px;color:#7A3B5A;text-align:center}
-  .mcard .cap-price{text-align:center;font-weight:700;font-size:13px;color:#E0789F;margin-top:2px}
-  .mcard.out img,.mcard.out .ph{opacity:.35;filter:grayscale(.6)}
-  .mcard .het{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:20px;color:#7A3B5A;letter-spacing:2px;z-index:4}
-  .mcard.out .cap,.mcard.out .cap-price{color:#8E8580}
-  .contact{background:#FFFBF5;border-radius:16px;padding:14px 16px;font-size:14px;line-height:1.7;margin:18px 0;box-shadow:0 3px 12px rgba(160,105,74,.10);border:1.5px solid #F5D7E3}
-  .contact b{color:#E0789F}
-  .lnk{color:#7A3B5A;text-decoration:none;border-bottom:1.5px dashed #E0789F;padding-bottom:1px}
-  .status{text-align:center;font-size:13px;color:#C9996E;min-height:18px;margin-bottom:10px}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;background:
+    radial-gradient(circle at 10% 15%, rgba(246,195,214,.5) 0, transparent 40%),
+    radial-gradient(circle at 90% 10%, rgba(201,176,234,.4) 0, transparent 35%),
+    radial-gradient(circle at 15% 60%, rgba(142,213,195,.35) 0, transparent 30%),
+    radial-gradient(circle at 85% 55%, rgba(252,217,122,.4) 0, transparent 35%),
+    radial-gradient(circle at 50% 95%, rgba(160,200,240,.35) 0, transparent 30%),
+    #FFF6EC;
+    color:#A0694A;font-family:'Quicksand',"Segoe UI",Roboto,Arial,sans-serif;padding:0 0 40px}
+  .hero{background:linear-gradient(135deg,#F6C3D6 0%,#FCE7A4 40%,#B9E4D2 70%,#BFD9F2 100%);padding:28px 16px 22px;text-align:center;border-radius:0 0 36px 36px;box-shadow:0 6px 20px rgba(160,105,74,.15);margin-bottom:18px;position:relative;overflow:hidden}
+  .hero:before{content:"";position:absolute;top:-30px;left:-30px;width:120px;height:120px;background:radial-gradient(circle,rgba(255,255,255,.4),transparent 70%);border-radius:50%}
+  .hero:after{content:"";position:absolute;bottom:-20px;right:-20px;width:100px;height:100px;background:radial-gradient(circle,rgba(255,255,255,.3),transparent 70%);border-radius:50%}
+  .hero h1{font-family:'Pacifico',cursive;font-size:28px;color:#6B3A5E;margin:0 0 4px;position:relative;z-index:1}
+  .hero p{font-weight:500;font-size:14px;color:#7A5A6E;margin:0;letter-spacing:1px;position:relative;z-index:1}
+  .wrap{max-width:520px;margin:0 auto;padding:0 12px}
+  .count-bar{text-align:center;font-size:14px;color:#7A3B5A;margin-bottom:14px;font-weight:600}
+  .mgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .mcard{background:linear-gradient(160deg,#FFFFFF 0%,#FFF9E6 100%);border:none;border-radius:16px;padding:10px 10px 14px;box-shadow:0 8px 24px rgba(160,105,74,.14);position:relative;transition:transform .2s,box-shadow .2s}
+  .mcard:nth-child(odd){transform:rotate(-0.8deg)}
+  .mcard:nth-child(even){transform:rotate(0.8deg)}
+  .mcard:active{transform:rotate(0deg) scale(1.02);box-shadow:0 12px 32px rgba(160,105,74,.2)}
+  .mcard:before{content:"";position:absolute;top:-8px;left:50%;transform:translateX(-50%) rotate(-2deg);width:50px;height:14px;border-radius:3px;z-index:2;opacity:.9}
+  .mcard:nth-child(4n+1):before{background:linear-gradient(90deg,#FCD97A,#F7E8A0)}
+  .mcard:nth-child(4n+2):before{background:linear-gradient(90deg,#A0DCB8,#C8F0D8)}
+  .mcard:nth-child(4n+3):before{background:linear-gradient(90deg,#A0C8F0,#C0D8F8)}
+  .mcard:nth-child(4n+4):before{background:linear-gradient(90deg,#F6C3D6,#FBDDE9)}
+  .mcard .imgwrap{position:relative;border-radius:12px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(160,105,74,.08)}
+  .mcard img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;background:#F5E6D3;display:block;transition:transform .3s}
+  .mcard:active img{transform:scale(1.03)}
+  .mcard .ph{width:100%;aspect-ratio:1;border-radius:12px;background:linear-gradient(135deg,#F5E6D3,#FCE4EE);display:flex;align-items:center;justify-content:center;color:#C9996E;font-size:13px;font-weight:500}
+  .mcard .code{position:absolute;top:10px;left:10px;color:#fff;font-weight:700;font-size:12px;padding:4px 12px;border-radius:999px;z-index:3;box-shadow:0 2px 8px rgba(0,0,0,.15);letter-spacing:.5px}
+  .mcard:nth-child(4n+1) .code{background:linear-gradient(135deg,#E9B93F,#F0CC5F)}
+  .mcard:nth-child(4n+2) .code{background:linear-gradient(135deg,#5DB88A,#7DD4A6)}
+  .mcard:nth-child(4n+3) .code{background:linear-gradient(135deg,#5A96D0,#7AB4E8)}
+  .mcard:nth-child(4n+4) .code{background:linear-gradient(135deg,#D06888,#E890A8)}
+  .mcard .qty{position:absolute;bottom:10px;right:10px;background:rgba(255,255,255,.95);color:#7A3B5A;font-weight:700;font-size:12px;padding:4px 12px;border-radius:999px;z-index:3;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+  .mcard .price-tag{position:absolute;top:10px;right:10px;background:rgba(224,120,159,.95);color:#fff;font-weight:700;font-size:12px;padding:4px 12px;border-radius:999px;z-index:3;box-shadow:0 2px 6px rgba(224,120,159,.4)}
+  .mcard .info{margin-top:10px;text-align:center}
+  .mcard .cap{font-weight:700;font-size:15px;letter-spacing:.5px;color:#6B3A5E}
+  .mcard .cap-price{font-weight:700;font-size:14px;color:#E0789F;margin-top:3px}
+  .mcard.out{opacity:.7}
+  .mcard.out img,.mcard.out .ph{filter:grayscale(.7) brightness(.9)}
+  .mcard .het{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:22px;color:#fff;letter-spacing:3px;z-index:4;background:rgba(122,59,90,.35);border-radius:12px;text-shadow:0 2px 4px rgba(0,0,0,.2)}
+  .mcard.out .cap{color:#8E8580}
+  .mcard.out .cap-price{color:#B0A8A0}
+  .contact{background:linear-gradient(160deg,#FFFBF5 0%,#FCE4EE 50%,#E6F5EE 100%);border-radius:20px;padding:18px 18px;font-size:14px;line-height:1.8;margin:22px 0;box-shadow:0 4px 16px rgba(160,105,74,.10);border:1.5px solid #F5D7E3;position:relative;overflow:hidden}
+  .contact:before{content:"🌸";position:absolute;top:12px;right:14px;font-size:20px;opacity:.6}
+  .contact b{color:#D06888}
+  .lnk{color:#6B3A5E;text-decoration:none;border-bottom:2px dashed #E0789F;padding-bottom:1px;transition:color .2s}
+  .status{text-align:center;font-size:13px;color:#C9996E;min-height:18px;margin-bottom:12px;font-weight:500}
 </style>
 </head>
 <body>
+<div class="hero">
+  <h1>Móc khóa &amp; Dây đeo</h1>
+  <p>handmade · hoa không tàn</p>
+</div>
 <div class="wrap">
-  <h1>Móc khóa hoa, dây đeo điện thoại </h1>
   <div class="status" id="status">Đang tải...</div>
+  <div class="count-bar" id="countbar"></div>
   <div class="mgrid" id="grid"></div>
   <div class="contact">
     <b>Đặt hàng qua</b> <a class="lnk" href="https://www.facebook.com/share/1WxKmdwPJn/?mibextid=wwXIfr" target="_blank" rel="noopener"><b>Facebook</b></a> <i>(chạm vào để thấy mình ạ)</i><br>
@@ -63,10 +86,9 @@
 
   function render(){
     var grid = document.getElementById("grid");
-    if (CODES.length === 0){
-      grid.innerHTML = "";
-      return;
-    }
+    var avail = CODES.filter(function(c){ return !OUT.has(c) && !(QTY[c] !== undefined && QTY[c] <= 0); }).length;
+    document.getElementById("countbar").textContent = CODES.length > 0 ? "Còn " + avail + " / " + CODES.length + " mẫu" : "";
+    if (CODES.length === 0){ grid.innerHTML = ""; return; }
     grid.innerHTML = CODES.map(function(code){
       var isOut = OUT.has(code) || (QTY[code] !== undefined && QTY[code] <= 0);
       var q = QTY[code];
@@ -84,9 +106,9 @@
           (qLabel ? '<span class="qty">' + qLabel + '</span>' : '') +
           (isOut ? '<span class="het">HẾT</span>' : '') +
         '</div>' +
-        '<div class="cap">' + code + '</div>' +
+        '<div class="info"><div class="cap">' + code + '</div>' +
         (price ? '<div class="cap-price">' + price + '</div>' : '') +
-      '</div>';
+        '</div></div>';
     }).join("");
   }
 
