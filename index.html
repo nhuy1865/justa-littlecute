@@ -28,18 +28,22 @@
   .mcard:nth-child(4n+3) .code{background:#6FA8DC}
   .mcard:nth-child(4n+4) .code{background:#E0789F}
   .mcard .qty{position:absolute;bottom:8px;right:8px;background:rgba(255,255,255,.92);color:#7A3B5A;font-weight:700;font-size:12px;padding:3px 10px;border-radius:999px;z-index:3}
+  .mcard .price-tag{position:absolute;top:8px;right:8px;background:rgba(224,120,159,.92);color:#fff;font-weight:700;font-size:12px;padding:3px 10px;border-radius:999px;z-index:3}
   .mcard .cap{margin-top:10px;font-weight:700;font-size:14px;letter-spacing:.5px;color:#7A3B5A;text-align:center}
+  .mcard .cap-price{text-align:center;font-weight:700;font-size:13px;color:#E0789F;margin-top:2px}
   .mcard.out img,.mcard.out .ph{opacity:.35;filter:grayscale(.6)}
   .mcard .het{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:20px;color:#7A3B5A;letter-spacing:2px;z-index:4}
-  .mcard.out .cap{color:#8E8580}
+  .mcard.out .cap,.mcard.out .cap-price{color:#8E8580}
   .contact{background:#FFFBF5;border-radius:16px;padding:14px 16px;font-size:14px;line-height:1.7;margin:18px 0;box-shadow:0 3px 12px rgba(160,105,74,.10);border:1.5px solid #F5D7E3}
   .contact b{color:#E0789F}
   .lnk{color:#7A3B5A;text-decoration:none;border-bottom:1.5px dashed #E0789F;padding-bottom:1px}
+  .status{text-align:center;font-size:13px;color:#C9996E;min-height:18px;margin-bottom:10px}
 </style>
 </head>
 <body>
 <div class="wrap">
   <h1>những mẫu còn hàng</h1>
+  <div class="status" id="status">Đang tải...</div>
   <div class="mgrid" id="grid"></div>
   <div class="contact">
     <b>Đặt hàng qua</b> <a class="lnk" href="https://www.facebook.com/share/1WxKmdwPJn/?mibextid=wwXIfr" target="_blank" rel="noopener"><b>Facebook</b></a> <i>(chạm vào để thấy mình ạ)</i><br>
@@ -50,17 +54,24 @@
   </div>
 </div>
 <script>
-  const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSATzAGqsi9QiIbjT6Q5CLc3dMCdCYSEv9YStpqyBEEPnMibRTyf7gU4Op6VHI9UyF8MWLypcZ8guNm/pub?gid=2070850580&single=true&output=csv";
-  const CODES = ["MK01","MK02","MK03","MK04","MK05","MK06","MK07","MK08","MK09","MK10"];
-  let OUT = new Set();
-  let IMGS = {};
-  let QTY = {};
+  var CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSATzAGqsi9QiIbjT6Q5CLc3dMCdCYSEv9YStpqyBEEPnMibRTyf7gU4Op6VHI9UyF8MWLypcZ8guNm/pub?gid=2070850580&single=true&output=csv";
+  var CODES = [];
+  var OUT = new Set();
+  var IMGS = {};
+  var QTY = {};
+  var PRICES = {};
 
   function render(){
-    document.getElementById("grid").innerHTML = CODES.map(function(code){
+    var grid = document.getElementById("grid");
+    if (CODES.length === 0){
+      grid.innerHTML = "";
+      return;
+    }
+    grid.innerHTML = CODES.map(function(code){
       var isOut = OUT.has(code) || (QTY[code] !== undefined && QTY[code] <= 0);
       var q = QTY[code];
       var qLabel = q !== undefined ? (q > 0 ? "còn " + q : "hết") : "";
+      var price = PRICES[code] || "";
       var hasImg = IMGS[code];
       var imgHtml = hasImg
         ? '<img src="' + IMGS[code] + '" alt="' + code + '" loading="lazy" onerror="this.outerHTML=\'<div class=ph>chưa có ảnh</div>\'">'
@@ -69,25 +80,28 @@
         '<div class="imgwrap">' +
           imgHtml +
           '<span class="code">' + code + '</span>' +
+          (price ? '<span class="price-tag">' + price + '</span>' : '') +
           (qLabel ? '<span class="qty">' + qLabel + '</span>' : '') +
           (isOut ? '<span class="het">HẾT</span>' : '') +
         '</div>' +
         '<div class="cap">' + code + '</div>' +
+        (price ? '<div class="cap-price">' + price + '</div>' : '') +
       '</div>';
     }).join("");
   }
 
-  render();
-
   function parseCSV(text){
     var lines = text.split("\n");
+    CODES = [];
     OUT = new Set();
     IMGS = {};
     QTY = {};
+    PRICES = {};
     for (var i = 1; i < lines.length; i++){
       var parts = lines[i].split(",");
       var code = (parts[0] || "").trim().toUpperCase().replace(/"/g,"");
       if (!code) continue;
+      CODES.push(code);
       var st = (parts[1] || "").trim().toLowerCase().replace(/"/g,"");
       if (st === "hết" || st === "het") OUT.add(code);
       var url = (parts[2] || "").trim().replace(/"/g,"");
@@ -98,8 +112,11 @@
       }
       var q = (parts[3] || "").trim().replace(/"/g,"");
       if (q !== "") QTY[code] = Number(q);
+      var p = (parts[4] || "").trim().replace(/"/g,"");
+      if (p) PRICES[code] = p;
     }
     render();
+    document.getElementById("status").textContent = "";
   }
 
   async function load(){
@@ -108,7 +125,9 @@
       if (!res.ok) throw new Error("bad");
       var text = await res.text();
       parseCSV(text);
-    } catch(e){}
+    } catch(e){
+      document.getElementById("status").textContent = "Chưa tải được, bạn tải lại trang nha";
+    }
   }
   load();
   setInterval(load, 60000);
