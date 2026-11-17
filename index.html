@@ -54,7 +54,7 @@
   </div>
 </div>
 <script>
-  var CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSATzAGqsi9QiIbjT6Q5CLc3dMCdCYSEv9YStpqyBEEPnMibRTyf7gU4Op6VHI9UyF8MWLypcZ8guNm/pub?gid=2070850580&single=true&output=csv";
+  var API_URL = "https://script.google.com/macros/s/AKfycbyI-JQUfphDVaOKQ50ijSOQmaE_d9I78BlvV7BPIWwGeRXwfPKyH4NosG6sT4IlHRpS/exec";
   var CODES = [];
   var OUT = new Set();
   var IMGS = {};
@@ -90,47 +90,31 @@
     }).join("");
   }
 
-  function parseCSV(text){
-    var lines = text.split("\n");
-    CODES = [];
-    OUT = new Set();
-    IMGS = {};
-    QTY = {};
-    PRICES = {};
-    for (var i = 1; i < lines.length; i++){
-      var parts = lines[i].split(",");
-      var code = (parts[0] || "").trim().toUpperCase().replace(/"/g,"");
-      if (!code) continue;
-      CODES.push(code);
-      var st = (parts[1] || "").trim().toLowerCase().replace(/"/g,"");
-      if (st === "hết" || st === "het") OUT.add(code);
-      var url = (parts[2] || "").trim().replace(/"/g,"");
-      if (url) {
-        var match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
-        if (match) url = "https://lh3.googleusercontent.com/d/" + match[1];
-        IMGS[code] = url;
-      }
-      var q = (parts[3] || "").trim().replace(/"/g,"");
-      if (q !== "") QTY[code] = Number(q);
-      var p = (parts[4] || "").trim().replace(/"/g,"");
-      if (p) PRICES[code] = p;
-    }
-    render();
-    document.getElementById("status").textContent = "";
-  }
-
   async function load(){
     try {
-      var res = await fetch(CSV_URL + "&t=" + Date.now());
+      var res = await fetch(API_URL + "?t=" + Date.now(), {cache:"no-store"});
       if (!res.ok) throw new Error("bad");
-      var text = await res.text();
-      parseCSV(text);
+      var data = await res.json();
+      CODES = [];
+      OUT = new Set((data.out || []).map(function(c){return String(c).trim().toUpperCase();}));
+      IMGS = {};
+      QTY = {};
+      PRICES = {};
+      var imgs = data.imgs || {};
+      var qty = data.qty || {};
+      var prices = data.prices || {};
+      for (var k in imgs) { var c = k.toUpperCase(); IMGS[c] = imgs[k]; if (CODES.indexOf(c) === -1) CODES.push(c); }
+      for (var k in qty) { var c = k.toUpperCase(); QTY[c] = Number(qty[k]); if (CODES.indexOf(c) === -1) CODES.push(c); }
+      for (var k in prices) { var c = k.toUpperCase(); PRICES[c] = prices[k]; if (CODES.indexOf(c) === -1) CODES.push(c); }
+      CODES.sort();
+      render();
+      document.getElementById("status").textContent = "";
     } catch(e){
       document.getElementById("status").textContent = "Chưa tải được, bạn tải lại trang nha";
     }
   }
   load();
-  setInterval(load, 60000);
+  setInterval(load, 30000);
 </script>
 </body>
 </html>
