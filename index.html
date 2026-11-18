@@ -56,6 +56,8 @@
   .contact:before{content:"🌸";position:absolute;top:12px;right:14px;font-size:20px;opacity:.6}
   .contact b{color:#D06888}
   .lnk{color:#6B3A5E;text-decoration:none;border-bottom:2px dashed #E0789F;padding-bottom:1px;transition:color .2s}
+  .banner{border-radius:16px;overflow:hidden;margin-bottom:16px;box-shadow:0 6px 20px rgba(160,105,74,.15)}
+  .banner img{width:100%;display:block;border-radius:16px}
   .status{text-align:center;font-size:13px;color:#C9996E;min-height:18px;margin-bottom:12px;font-weight:500}
 </style>
 </head>
@@ -65,6 +67,7 @@
   <p>handmade · hoa không tàn</p>
 </div>
 <div class="wrap">
+  <div class="banner" id="banner" style="display:none"></div>
   <div class="status" id="status">Đang tải...</div>
   <div class="count-bar" id="countbar"></div>
   <div class="mgrid" id="grid"></div>
@@ -129,6 +132,14 @@
       for (var k in qty) { var c = k.toUpperCase(); QTY[c] = Number(qty[k]); if (CODES.indexOf(c) === -1) CODES.push(c); }
       for (var k in prices) { var c = k.toUpperCase(); PRICES[c] = prices[k]; if (CODES.indexOf(c) === -1) CODES.push(c); }
       CODES.sort();
+      var bannerEl = document.getElementById("banner");
+      if (IMGS["BANNER"]) {
+        bannerEl.innerHTML = '<img src="' + IMGS["BANNER"] + '" alt="Mẫu trưng bày">';
+        bannerEl.style.display = "block";
+        CODES = CODES.filter(function(c){ return c !== "BANNER"; });
+      } else {
+        bannerEl.style.display = "none";
+      }
       render();
       document.getElementById("status").textContent = "";
     } catch(e){
