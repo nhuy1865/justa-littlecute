@@ -58,7 +58,7 @@
   .lnk{color:#6B3A5E;text-decoration:none;border-bottom:2px dashed #E0789F;padding-bottom:1px;transition:color .2s}
   .banner{border-radius:16px;overflow:hidden;margin-bottom:16px;box-shadow:0 6px 20px rgba(160,105,74,.15)}
   .video{border-radius:16px;overflow:hidden;margin-bottom:16px;box-shadow:0 6px 20px rgba(160,105,74,.15)}
-  .video iframe{width:100%;aspect-ratio:16/9;border:none;border-radius:16px;display:block}
+  .video iframe,.video video{width:100%;border:none;border-radius:16px;display:block}
   .banner img{width:100%;display:block;border-radius:16px}
   .status{text-align:center;font-size:13px;color:#C9996E;min-height:18px;margin-bottom:12px;font-weight:500}
 </style>
@@ -149,7 +149,7 @@
           videoEl.innerHTML = '<iframe src="https://www.youtube.com/embed/' + yt[1] + '" allowfullscreen></iframe>';
           videoEl.style.display = "block";
         } else if (gd) {
-          videoEl.innerHTML = '<iframe src="https://drive.google.com/file/d/' + gd[1] + '/preview" allowfullscreen></iframe>';
+          videoEl.innerHTML = '<video src="https://drive.google.com/uc?id=' + gd[1] + '&export=download" controls playsinline preload="metadata" style="width:100%;border-radius:16px;display:block"></video>';
           videoEl.style.display = "block";
         } else {
           videoEl.style.display = "none";
